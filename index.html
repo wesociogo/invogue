@@ -1,0 +1,2629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>INVOGUE — Architect &amp; Interior Design</title>
+  <meta name="description" content="INVOGUE Architect &amp; Interior Design — Dreams Unfold." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       CSS VARIABLES — INVOGUE Brand Colors
+    ============================================================ */
+    :root {
+      --color-bg:        #0d0d0d;       /* deep black — logo background */
+      --color-surface:   #141414;       /* slightly lifted dark surface */
+      --color-card:      #1a1a1a;       /* card backgrounds */
+      --color-border:    #2a2a2a;       /* subtle borders */
+      --color-olive:     #8a9a1a;       /* INVOGUE olive green */
+      --color-gold:      #a08845;       /* subtitle gold */
+      --color-gold-lt:   #c4a96a;       /* lighter gold for hover/highlights */
+      --color-cream:     #e8dcc8;       /* floral motif cream */
+      --color-text:      #d8d0c4;       /* warm off-white body text */
+      --color-muted:     #6a6458;       /* muted text */
+      --color-white:     #f5f0e8;       /* warm white */
+
+      --font-display:  'Cormorant Garamond', Georgia, serif;
+      --font-body:     'Montserrat', sans-serif;
+      --font-script:   'Great Vibes', cursive;
+
+      --nav-height:  70px;
+      --max-w:       1200px;
+      --pad:         48px;
+    }
+
+    /* ============================================================
+   LIGHT THEME
+============================================================ */
+body.light-theme {
+  --color-bg: #f5f0e8;
+  --color-surface: #ffffff;
+  --color-card: #f8f4ec;
+  --color-border: #d6cfc2;
+  --color-text: #2a2a2a;
+  --color-muted: #666;
+  --color-white: #111;
+  --color-cream: #222;
+}
+
+/* Navbar slight light color */
+body.light-theme #navbar {
+  background: rgba(255,255,255,0.92);
+  border-bottom: 1px solid #ddd;
+}
+
+/* Theme Button */
+#theme-toggle {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-gold);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  margin-left: 16px;
+}
+
+#theme-toggle:hover {
+  background: var(--color-olive);
+  color: var(--color-bg);
+  transform: rotate(180deg);
+}
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    img { display: block; max-width: 100%; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--color-bg); }
+    ::-webkit-scrollbar-thumb { background: var(--color-gold); }
+
+    /* ============================================================
+       TYPOGRAPHY
+    ============================================================ */
+    .t-display {
+      font-family: var(--font-display);
+      font-weight: 300;
+      line-height: 1.1;
+    }
+    .t-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--color-olive);
+    }
+    .t-script {
+      font-family: var(--font-script);
+      color: var(--color-gold);
+    }
+    .t-muted { color: var(--color-muted); font-size: 12px; }
+
+    /* Gold divider line */
+    .gold-line {
+      width: 48px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--color-olive), var(--color-gold));
+      margin: 16px 0 24px;
+    }
+
+    /* ============================================================
+       PAGE SYSTEM
+    ============================================================ */
+    .page { display: none; padding-top: var(--nav-height); min-height: 100vh; }
+    .page.active { display: block; }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--pad);
+      background: rgba(13,13,13,0.97);
+      border-bottom: 1px solid var(--color-border);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+    .main-logo {
+      height: 64px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      filter: brightness(1.05);
+      mix-blend-mode: lighten;
+    }
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .nav-logo-text .brand {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      color: var(--color-olive);
+    }
+    .nav-logo-text .tagline {
+      font-family: var(--font-script);
+      font-size: 0.9rem;
+      color: var(--color-gold);
+      margin-top: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      padding-bottom: 3px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.25s, border-color 0.25s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--color-gold-lt);
+      border-bottom-color: var(--color-olive);
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--color-gold);
+    }
+
+    /* Mobile overlay nav */
+    #mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--color-bg);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+    #mobile-nav.open { display: flex; }
+    #mobile-nav a {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--color-cream);
+      letter-spacing: 0.08em;
+    }
+    #mobile-nav a:hover { color: var(--color-olive); }
+    #mobile-nav .close-btn {
+      position: absolute; top: 20px; right: 24px;
+      font-size: 28px; cursor: pointer;
+      background: none; border: none; color: var(--color-gold);
+    }
+
+    /* ============================================================
+       HOME — HERO
+    ============================================================ */
+    #page-home .hero {
+      position: relative;
+      height: calc(100vh - var(--nav-height));
+      overflow: hidden;
+      background: #060606;
+    }
+
+    .hero-slide {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 1.4s ease;
+    }
+    .hero-slide.active { opacity: 1; }
+
+    .hero-slide img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.45);
+    }
+
+    /* Gradient overlay for dark bottom */
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 40%,
+        rgba(13,13,13,0.7) 80%,
+        var(--color-bg) 100%
+      );
+    }
+
+    .hero-content {
+      position: absolute;
+      bottom: 72px;
+      left: var(--pad);
+      right: var(--pad);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .hero-text .proj-label { color: var(--color-olive); margin-bottom: 8px; }
+    .hero-text .proj-name {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      color: var(--color-white);
+      line-height: 1.05;
+    }
+    .hero-text .proj-type {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--color-gold);
+      margin-top: 8px;
+      text-transform: uppercase;
+    }
+
+    .hero-dots {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .hero-dot {
+      width: 2px; height: 24px;
+      background: rgba(160,136,69,0.3);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .hero-dot.active {
+      background: var(--color-gold);
+      height: 36px;
+    }
+
+    /* tagline strip */
+    .hero-tagline {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      pointer-events: none;
+    }
+    .hero-tagline .big {
+      font-family: var(--font-script);
+      font-size: clamp(3rem, 7vw, 6rem);
+      color: rgba(160,136,69,0.25);
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       SECTION HEADER (reusable)
+    ============================================================ */
+    .sec-header {
+      padding: 64px var(--pad) 40px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .sec-header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      color: var(--color-cream);
+      margin-top: 10px;
+    }
+
+    /* ============================================================
+       WORK PAGE
+    ============================================================ */
+    .work-filters {
+      display: flex; gap: 10px;
+      padding: 24px var(--pad);
+      border-bottom: 1px solid var(--color-border);
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-family: var(--font-body);
+      font-size: 9px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 7px 18px;
+      border: 1px solid var(--color-border);
+      background: transparent;
+      color: var(--color-muted);
+      cursor: pointer;
+      transition: all 0.22s;
+    }
+    .filter-btn:hover { color: var(--color-cream); border-color: var(--color-gold); }
+    .filter-btn.active {
+      background: var(--color-olive);
+      color: var(--color-bg);
+      border-color: var(--color-olive);
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--color-border);
+    }
+
+    .project-card {
+      position: relative; overflow: hidden;
+      cursor: pointer; background: var(--color-card);
+    }
+    .project-card .card-img {
+      width: 100%; height: 320px;
+      object-fit: cover;
+      transition: transform 0.8s ease, filter 0.5s;
+      filter: brightness(0.8) saturate(0.9);
+    }
+    .project-card:hover .card-img {
+      transform: scale(1.02);
+      filter: brightness(0.55) saturate(1);
+    }
+    .project-card-info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 32px 20px 20px;
+      background: linear-gradient(transparent, rgba(13,13,13,0.88));
+      transform: translateY(10px);
+      opacity: 0;
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .project-card:hover .project-card-info { opacity: 1; transform: translateY(0); }
+    .project-card-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem; font-weight: 400;
+      color: var(--color-cream);
+    }
+    .project-card-info span {
+      font-size: 9px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--color-gold);
+    }
+
+    /* always-visible label at top */
+    .card-badge {
+      position: absolute; top: 16px; left: 16px;
+      background: var(--color-olive);
+      color: var(--color-bg);
+      font-size: 8px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 4px 10px;
+    }
+
+    /* placeholder gradient cards */
+    .card-ph {
+      width: 100%; height: 320px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--color-muted);
+    }
+
+    /* ============================================================
+       OFFICE PAGE
+    ============================================================ */
+    .office-subnav {
+      display: flex; gap: 0;
+      border-bottom: 1px solid var(--color-border);
+      padding: 0 var(--pad);
+      overflow-x: auto;
+    }
+    .office-tab {
+      font-size: 9px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 20px 22px;
+      color: var(--color-muted);
+      border-bottom: 2px solid transparent;
+      white-space: nowrap; cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .office-tab:hover { color: var(--color-gold-lt); }
+    .office-tab.active {
+      color: var(--color-olive);
+      border-bottom-color: var(--color-olive);
+    }
+
+    .office-section {
+      display: none;
+      width: 100%;
+     }
+    .office-section.active {
+        display: block;
+        width: 100%;
+      }
+
+      #page-office {
+      overflow-x: hidden;
+      }
+    /* Profile */
+    .profile-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 72px var(--pad);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .profile-img {
+      width: 100%; height: 520px;
+      background: var(--color-card);
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--color-border);
+      color: var(--color-muted); font-size: 11px; letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .profile-text h2 {
+      font-family: var(--font-display);
+      font-size: 2.6rem; font-weight: 300;
+      color: var(--color-cream); line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    .profile-text p { color: var(--color-text); line-height: 1.9; font-size: 13px; }
+
+    /* People */
+    .people-grid {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 72px var(--pad);
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 36px 28px;
+    }
+    /* .person-card { } */
+    .person-img {
+      width: 100%; height: 240px;
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--color-muted); font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 14px;
+      transition: border-color 0.3s;
+    }
+    .person-card:hover .person-img { border-color: var(--color-gold); }
+    .person-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.05rem; font-weight: 400;
+      color: var(--color-cream); margin-bottom: 3px;
+    }
+    .person-card .role {
+      font-size: 9px; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--color-olive);
+    }
+    .person-card .bio {
+      font-size: 11px; color: var(--color-muted);
+      line-height: 1.65; margin-top: 8px;
+    }
+
+    /* Awards */
+    .awards-inner {
+      max-width: 900px; margin: 0 auto;
+      padding: 72px var(--pad);
+    }
+    .awards-inner h2 {
+      font-family: var(--font-display);
+      font-size: 2rem; font-weight: 300;
+      color: var(--color-cream); margin-bottom: 40px;
+    }
+    .awards-list {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    }
+    .award-item {
+      padding: 16px 16px 16px 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 12px; color: var(--color-text);
+    }
+    .award-item .year {
+      font-size: 9px; letter-spacing: 0.12em;
+      color: var(--color-gold); margin-bottom: 3px;
+    }
+   
+/* ============================================================
+   AWARDS SECTION
+============================================================ */
+
+    .awards-gallery {
+      width: 100%;
+    }
+
+    /* ONLY FOR AWARDS SECTION */
+
+    #office-awards .awards-page {
+      display: none;
+    }
+
+    #office-awards .awards-page.active {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 38px;
+    width: 100%;
+    }
+
+    .award-card {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+      transition: all 0.35s ease;
+    }
+
+    .award-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--color-gold);
+    }
+
+    /* IMAGE */
+    .award-img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* CONTENT */
+    .award-content {
+      padding: 28px;
+    }
+
+    .award-year {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: 18px;
+    }
+
+    .award-content h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      line-height: 1.25;
+      color: var(--color-cream);
+      margin-bottom: 20px;
+    }
+
+    .award-content p {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--color-text);
+    }
+
+    /* PAGINATION */
+    #office-awards .awards-pagination {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    #office-awards .award-page-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      background: transparent;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #office-awards .award-page-btn:hover {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+    }
+
+    #office-awards .award-page-btn.active {
+      background: var(--color-olive);
+      color: var(--color-bg);
+      border-color: var(--color-olive);
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+
+      #office-awards .awards-page.active {
+        grid-template-columns: 1fr;
+      }
+
+      .award-img {
+        height: 240px;
+      }
+
+      .award-content h3 {
+        font-size: 1.5rem;
+      }
+
+    }
+
+    /* ============================================================
+   IMAGE LIGHTBOX
+============================================================ */
+
+    #image-lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.94);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5000;
+
+      opacity: 0;
+      pointer-events: none;
+
+      transition: opacity 0.35s ease;
+    }
+
+    #image-lightbox.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #lightbox-img {
+      max-width: 92%;
+      max-height: 92%;
+      object-fit: contain;
+
+      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    }
+
+    #lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+
+      font-size: 34px;
+      color: white;
+
+      cursor: pointer;
+
+      transition: opacity 0.25s ease;
+    }
+
+    #lightbox-close:hover {
+      opacity: 0.7;
+    }
+
+    /* CLICKABLE IMAGE */
+    .award-img {
+      cursor: pointer;
+    }
+
+    /* ============================================================
+   GLOBAL MODAL
+============================================================ */
+
+  #global-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.94);
+
+  z-index: 9999;
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition: opacity 0.35s ease;
+  }
+
+  #global-modal.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  }
+
+    /* ============================================================
+   ADVANCED PROJECT MODAL
+============================================================ */
+
+    .modal-container {
+      width: 100%;
+      height: 100%;
+
+      overflow-y: auto;
+    }
+
+    .modal-full-content {
+      max-width: 1200px;
+      margin: 80px auto;
+
+      padding: 0 40px 60px;
+    }
+
+    #modal-close {
+      position: fixed;
+      top: 24px;
+      right: 32px;
+
+      font-size: 34px;
+      color: white;
+
+      cursor: pointer;
+
+      z-index: 10000;
+    }
+
+    /* MAIN IMAGE */
+
+    .modal-main-image-wrap {
+      width: 100%;
+      margin-bottom: 40px;
+    }
+
+    #modal-image {
+      width: 100%;
+      max-height: 80vh;
+
+      object-fit: contain;
+
+      border: 1px solid var(--color-border);
+    }
+
+    /* CONTENT */
+
+    .modal-info {
+      max-width: 820px;
+      margin: 0 auto 50px;
+      text-align: center;
+    }
+
+    #modal-details .modal-category {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+
+      color: var(--color-gold);
+
+      margin-bottom: 16px;
+    }
+
+    #modal-details h2 {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 300;
+
+      color: var(--color-cream);
+
+      margin-bottom: 22px;
+    }
+
+    #modal-details p {
+      font-size: 15px;
+      line-height: 2;
+
+      color: var(--color-text);
+    }
+
+    /* GALLERY */
+
+    .modal-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .modal-gallery img {
+      width: 100%;
+      height: 240px;
+
+      object-fit: cover;
+
+      cursor: pointer;
+
+      transition: all 0.3s ease;
+
+      border: 1px solid transparent;
+    }
+
+    .modal-gallery img:hover {
+      transform: scale(1.02);
+
+      border-color: var(--color-gold);
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 768px) {
+
+      .modal-full-content {
+        padding: 0 20px 50px;
+      }
+
+      #modal-details h2 {
+        font-size: 2rem;
+      }
+
+      .modal-gallery {
+        grid-template-columns: 1fr;
+      }
+
+    }
+    /* .modal-container {
+      width: 100%;
+      height: 100%;
+
+      display: grid;
+      grid-template-columns: 1.4fr 0.6fr;
+    } */
+
+    /* .modal-image-wrap {
+      background: black;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: auto;
+    } */
+
+    #modal-image {
+      width: auto;
+      height: auto;
+
+      max-width: 95%;
+      max-height: 95%;
+
+      object-fit: contain;
+    }
+
+    /* .modal-content {
+      background: #111;
+      padding: 60px 50px;
+
+      overflow-y: auto;
+
+      position: relative;
+    } */
+
+    /* #modal-close {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+
+      font-size: 32px;
+      color: white;
+
+      cursor: pointer;
+    } */
+
+    #modal-details h2 {
+      font-family: var(--font-display);
+      font-size: 2.3rem;
+      font-weight: 300;
+
+      color: var(--color-cream);
+
+      margin-bottom: 18px;
+    }
+
+    #modal-details .modal-category {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+
+      color: var(--color-gold);
+
+      margin-bottom: 24px;
+    }
+
+    #modal-details p {
+      font-size: 14px;
+      line-height: 2;
+
+      color: var(--color-text);
+    }
+
+    /* CLICKABLE */
+    .award-img,
+    .project-card {
+      cursor: pointer;
+    }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+
+      .modal-container {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-content {
+        padding: 40px 28px;
+      }
+
+      #modal-details h2 {
+        font-size: 1.7rem;
+      }
+
+    }
+
+    /* Publications */
+    .publications-inner {
+      max-width: 900px; margin: 0 auto;
+      padding: 72px var(--pad);
+    }
+    .publications-inner h2 {
+      font-family: var(--font-display);
+      font-size: 2rem; font-weight: 300;
+      color: var(--color-cream); margin-bottom: 32px;
+    }
+    .pub-tabs { display: flex; gap: 24px; margin-bottom: 36px; }
+    .pub-tab {
+      font-size: 9px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      padding-bottom: 7px;
+      border-bottom: 2px solid transparent;
+      cursor: pointer; color: var(--color-muted); transition: all 0.2s;
+    }
+    .pub-tab.active { color: var(--color-olive); border-bottom-color: var(--color-olive); }
+    .pub-list { display: none; }
+    .pub-list.active { display: block; }
+    .pub-item {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 12px; color: var(--color-text);
+    }
+
+    /* Events */
+    .events-inner {
+      max-width: 900px; margin: 0 auto;
+      padding: 72px var(--pad);
+    }
+    .event-group { margin-bottom: 48px; }
+    .event-group h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem; font-weight: 300;
+      color: var(--color-cream); margin-bottom: 20px;
+    }
+    .event-item {
+      display: flex; gap: 24px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 12px;
+    }
+    .event-year {
+      min-width: 44px; color: var(--color-gold);
+      font-size: 10px; letter-spacing: 0.1em; padding-top: 2px;
+    }
+
+    /* ============================================================
+       CONTACT PAGE
+    ============================================================ */
+    .contact-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 72px var(--pad);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+    .contact-left h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 300; color: var(--color-cream);
+      line-height: 1.1; margin-bottom: 12px;
+    }
+    .contact-left .tagline-script {
+      font-family: var(--font-script);
+      font-size: 1.8rem; color: var(--color-gold);
+      margin-bottom: 40px;
+    }
+    .contact-detail { margin-bottom: 28px; }
+    .contact-detail p { font-size: 13px; line-height: 1.85; color: var(--color-text); }
+
+    .social-links {
+      display: flex; gap: 10px; margin-top: 32px; flex-wrap: wrap;
+    }
+    .social-link {
+      font-size: 9px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 8px 16px;
+      border: 1px solid var(--color-border);
+      color: var(--color-muted);
+      transition: all 0.25s;
+    }
+    .social-link:hover {
+      background: var(--color-olive);
+      color: var(--color-bg);
+      border-color: var(--color-olive);
+    }
+
+    .whatsapp-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .whatsapp-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Form */
+    .contact-form { display: flex; flex-direction: column; gap: 22px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label {
+      font-size: 9px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--color-olive);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--color-border);
+      padding: 10px 0;
+      font-family: var(--font-body); font-size: 13px;
+      color: var(--color-cream); outline: none;
+      transition: border-color 0.25s;
+      width: 100%;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--color-muted); }
+    .form-group select option { background: var(--color-card); color: var(--color-cream); }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-bottom-color: var(--color-gold); }
+    .form-group textarea { min-height: 100px; resize: vertical; }
+
+    .btn-submit {
+      font-family: var(--font-body); font-size: 9px;
+      font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, var(--color-olive), var(--color-gold));
+      color: var(--color-bg);
+      border: none; padding: 15px 36px;
+      cursor: pointer; align-self: flex-start;
+      transition: opacity 0.25s, transform 0.2s;
+      margin-top: 8px;
+    }
+    .btn-submit:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    .map-placeholder {
+      width: 100%; height: 280px; margin-top: 48px;
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--color-muted);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    /* footer {
+      border-top: 1px solid var(--color-border);
+      padding: 28px var(--pad);
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 12px;
+      font-size: 10px; color: var(--color-muted);
+    }
+    footer .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1rem; color: var(--color-olive);
+      letter-spacing: 0.1em;
+    }
+    footer a:hover { color: var(--color-gold-lt); } */
+    
+    .main-footer {
+    border-top: 1px solid var(--color-border);
+    padding: 28px var(--pad);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 10px;
+    color: var(--color-muted);
+    background: var(--color-bg);
+}
+
+    .main-footer .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1rem; color: var(--color-olive);
+      letter-spacing: 0.1em;
+    }
+    .main-footer a:hover { color: var(--color-gold-lt); }
+
+    /* Services list */
+    .services-list .pub-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 13px;
+      color: var(--color-text);
+      letter-spacing: 0.04em;
+    }
+    .services-list .pub-item:hover {
+      color: var(--color-gold-lt);
+      padding-left: 6px;
+      transition: all 0.2s;
+    }
+
+    /* ============================================================
+       SCROLL TO TOP
+    ============================================================ */
+    #scroll-top {
+      position: fixed; bottom: 28px; right: 28px;
+      width: 42px; height: 42px;
+      background: var(--color-olive);
+      color: var(--color-bg); border: none;
+      cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 700;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s, background 0.25s;
+      z-index: 500;
+    }
+    #scroll-top.visible { opacity: 1; pointer-events: auto; }
+    #scroll-top:hover { background: var(--color-gold); }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 960px) {
+      :root { --pad: 24px; }
+      .work-grid { grid-template-columns: repeat(2, 1fr); }
+      .people-grid { grid-template-columns: repeat(2, 1fr); }
+      .profile-inner { grid-template-columns: 1fr; gap: 40px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .awards-list { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+    @media (max-width: 540px) {
+      .work-grid { grid-template-columns: 1fr; }
+      .hero-tagline .big { font-size: 2.5rem; }
+    }
+
+    .office-section {
+    min-height: 70vh;
+    }
+
+    /* DISABLE IMAGE DRAG */
+
+    img {
+      -webkit-user-drag: none;
+      user-select: none;
+      pointer-events: auto;
+    }
+
+    /* PREVENT TEXT / IMAGE SELECTION */
+
+    body {
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* MOBILE IMAGE PROTECTION */
+
+    img {
+      -webkit-touch-callout: none;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-logo" onclick="showPage('home')">
+    <img src="Logo Invogue copy.png" alt="INVOGUE Logo" class="main-logo">
+  </div>
+  <ul class="nav-links">
+    <li><button id="theme-toggle">&#9728;&#65039;</button></li>
+    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+    <li><a href="#" class="nav-link" data-page="work">Work</a></li>
+    <li><a href="#" class="nav-link" data-page="office">Office</a></li>
+    <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="openMobileNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div id="mobile-nav">
+  <button class="close-btn" onclick="closeMobileNav()">&#10005;</button>
+  <a href="#" onclick="showPage('home');closeMobileNav()">Home</a>
+  <a href="#" onclick="showPage('work');closeMobileNav()">Work</a>
+  <a href="#" onclick="showPage('office');closeMobileNav()">Office</a>
+  <a href="#" onclick="showPage('contact');closeMobileNav()">Contact</a>
+</div>
+
+<!-- ============================================================
+     HOME PAGE
+============================================================ -->
+<div id="page-home" class="page active">
+
+  <div class="hero">
+    <div class="hero-tagline"><div class="big">Dreams Unfold</div></div>
+
+    <div class="hero-slide active">
+      <div class="card-ph" style="background:linear-gradient(135deg,#1a1a14 0%,#0d0d08 100%);height:100%;width:100%;align-items:center;justify-content:center;display:flex;">
+        <span style="color:#3a3a30;font-size:12px;letter-spacing:0.2em;"><img src="Work/Residential/re1/re102.jpg" alt=""></span>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="t-label">Residential &middot; Mysuru</div>
+          <div class="proj-name">Project One</div>
+          <div class="proj-type">Bespoke Residence &middot; 2024</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide">
+      <div class="card-ph" style="background:linear-gradient(135deg,#14180a,#0a0d06);height:100%;width:100%;display:flex;align-items:center;justify-content:center;">
+        <span style="color:#2a2a20;font-size:12px;letter-spacing:0.2em;"><img src="Work/Residential/re3/re305.jpg" alt=""></span>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="t-label">Commercial &middot; Bangalore</div>
+          <div class="proj-name">Project Two</div>
+          <div class="proj-type">Commercial Space &middot; 2024</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide">
+      <div class="card-ph" style="background:linear-gradient(135deg,#181410,#0d0a07);height:100%;width:100%;display:flex;align-items:center;justify-content:center;">
+        <span style="color:#2a2520;font-size:12px;letter-spacing:0.2em;"><img src="Work/Gymstudio/G 3/gs315.jpg" alt=""></span>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="t-label">Resort &middot; Coorg</div>
+          <div class="proj-name">Project Three</div>
+          <div class="proj-type">Luxury Resort &middot; 2023</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide">
+      <div class="card-ph" style="background:linear-gradient(135deg,#161a10,#0c0e08);height:100%;width:100%;display:flex;align-items:center;justify-content:center;">
+        <span style="color:#282d18;font-size:12px;letter-spacing:0.2em;"><img src="Work/Interiors/inte2/inte203.jpg" alt=""></span>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="t-label">Interiors &middot; Mysuru</div>
+          <div class="proj-name">Project Four</div>
+          <div class="proj-type">Interior Design &middot; 2023</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="position:absolute;bottom:40px;right:var(--pad);">
+      <div id="hero-dots" class="hero-dots"></div>
+    </div>
+  </div>
+
+  <footer class="main-footer">
+    <span class="footer-logo">INVOGUE</span>
+    <span>Architect &amp; Interior Design Studio &middot; Bengaluru</span>
+    <span>&copy; 2026 All rights reserved</span>
+  </footer>
+
+</div><!-- /#page-home -->
+
+
+<!-- ============================================================
+     WORK PAGE
+============================================================ -->
+<div id="page-work" class="page">
+
+  <div class="sec-header">
+    <span class="t-label">Portfolio</span>
+    <h1>Selected Work</h1>
+  </div>
+
+  <div class="work-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="residential">Residential</button>
+    <button class="filter-btn" data-filter="interiors">Interiors</button>
+    <button class="filter-btn" data-filter="commercial">Commercial</button>
+    <button class="filter-btn" data-filter="resort">Resort</button>
+    <button class="filter-btn" data-filter="institutional">Institutional</button>
+    <button class="filter-btn" data-filter="gymstudio">Gym Studio</button>
+    <button class="filter-btn" data-filter="industries">Industries</button>
+  </div>
+
+  <div class="work-grid" id="work-grid">
+
+    <!--
+    ================================================================
+    HOW TO ADD A PROJECT CARD
+    Copy the block below, fill in the 4 data attributes and src,
+    then paste before the closing </div> of work-grid.
+
+    data-category options:
+      residential | interiors | interiors-residential | interiors-commercial
+      commercial  | resort    | institutional | gymstudio | industries
+
+    <div class="project-card"
+         data-category="CATEGORY"
+         data-image="PATH/TO/IMAGE.jpg"
+         data-title="Project Name"
+         data-description="Short description shown in modal.">
+      <div class="card-badge">Label</div>
+      <img src="PATH/TO/IMAGE.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Category &middot; Year</span>
+        <h3>Project Name</h3>
+      </div>
+    </div>
+    ================================================================
+    -->
+
+    <!-- REFERENCE CARD — duplicate and edit to add more projects -->
+    <div class="project-card"
+     data-category="residential"
+     data-image="Work/Residential/re1/re113.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Residential/re1/re101.jpg,Work/Residential/re1/re102.jpg,Work/Residential/re1/re103.jpg,Work/Residential/re1/re104.jpg,Work/Residential/re1/re105.jpg,Work/Residential/re1/re106.jpg,Work/Residential/re1/re107.jpg,Work/Residential/re1/re108.jpg,Work/Residential/re1/re109.jpg,Work/Residential/re1/re110.jpg,Work/Residential/re1/re111.jpg,Work/Residential/re1/re112.jpg,Work/Residential/re1/re114.jpg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Residential/re1/re113.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="commercial"
+     data-image="Work/Commercial/complex_3/cx37.png"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Commercial/complex_3/cx32.jpg,Work/Commercial/complex_3/cx31.jpg,Work/Commercial/complex_3/cx33.jpg,Work/Commercial/complex_3/cx34.jpg,Work/Commercial/complex_3/cx35.jpg,Work/Commercial/complex_3/cx36.jpg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Commercial/complex_3/cx37.png" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="interiors"
+     data-image="Work/Interiors/inte1/inte120.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Interiors/inte1/inte101.jpg,Work/Interiors/inte1/inte105.jpg,Work/Interiors/inte1/inte107.jpg,Work/Interiors/inte1/inte113.jpg,Work/Interiors/inte1/inte117.jpg,Work/Interiors/inte1/inte122.jpg,Work/Interiors/inte1/inte125.jpg,Work/Interiors/inte1/inte129.jpg,Work/Interiors/inte1/inte136.jpg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Interiors/inte1/inte120.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="residential"
+     data-image="Work/Residential/re2/re202.JPG"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Residential/re2/re201.JPG,Work/Residential/re2/re203.JPG,Work/Residential/re2/re204.JPG">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Residential/re2/re202.JPG" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="residential"
+     data-image="Work/Residential/re3/re305.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Residential/re3/re303.jpg,Work/Residential/re3/re302.jpg,Work/Residential/re3/re304.jpg,Work/Residential/re3/re301.jpg,Work/Residential/re3/re306.jpg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Residential/re3/re305.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="gymstudio"
+     data-image="Work/Gymstudio/G 1/gs123.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Gymstudio/G 1/gs126.jpg,Work/Gymstudio/G 1/gs125.jpg,Work/Gymstudio/G 1/gs124.jpg,Work/Gymstudio/G 1/gs122.jpg,Work/Gymstudio/G 1/gs121.jpg,Work/Gymstudio/G 1/gs120.jpg,Work/Gymstudio/G 1/gs119.jpg,Work/Gymstudio/G 1/gs118.jpg,Work/Gymstudio/G 1/gs117.jpg,Work/Gymstudio/G 1/gs116.jpg,Work/Gymstudio/G 1/gs114.jpg,Work/Gymstudio/G 1/gs106.jpg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Gymstudio/G 1/gs123.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="residential"
+     data-image="Work/Residential/re4/re404.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Residential/re4/re403.jpg,Work/Residential/re4/re401.jpg,Work/Residential/re4/re402.jpg,Work/Residential/re4/re405.jpg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Residential/re4/re404.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+     <div class="project-card"
+     data-category="resort"
+     data-image="Work/Resort/res1/res103.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Resort/res1/res105.jpg,Work/Resort/res1/res104.jpg,Work/Resort/res1/res102.jpg,Work/Resort/res1/res101.jpg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Resort/res1/res103.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="residential"
+     data-image="Work/Residential/re6.png"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Residential/re6.png" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="industries"
+     data-image="Work/Industries/industries2/ind225.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Industries/industries2/ind223.jpg,Work/Industries/industries2/ind221.jpg,Work/Industries/industries2/ind220.jpg,Work/Industries/industries2/ind219.jpg,Work/Industries/industries2/ind217.jpg,Work/Industries/industries2/ind216.jpg,Work/Industries/industries2/ind215.jpg,Work/Industries/industries2/ind214.jpg,Work/Industries/industries2/ind211.jpg,Work/Industries/industries2/ind204.jpg,Work/Industries/industries2/ind206.jpg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Industries/industries2/ind225.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="residential"
+     data-image="Work/Residential/re7.png"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Residential/re7.png" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="residential"
+     data-image="Work/Residential/re8/re804.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Residential/re8/re802.jpg,Work/Residential/re8/re801.jpg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Residential/re8/re804.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="residential"
+     data-image="Work/Residential/re9/inte907.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Residential/re9/inte908.jpg,Work/Residential/re9/inte906.jpg,Work/Residential/re9/inte905.jpg,Work/Residential/re9/inte904.jpg,Work/Residential/re9/inte903.jpg,Work/Residential/re9/inte902.jpg,Work/Residential/re9/inte901.jpg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Residential/re9/inte907.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="commercial"
+     data-image="Work/Commercial/complex_1/cx120.JPG"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Commercial/complex_1/cx11.JPG,Work/Commercial/complex_1/cx12.JPG,Work/Commercial/complex_1/cx13.JPG,Work/Commercial/complex_1/cx14.JPG,Work/Commercial/complex_1/cx15.JPG,Work/Commercial/complex_1/cx16.JPG,Work/Commercial/complex_1/cx17.JPG,Work/Commercial/complex_1/cx18.JPG,Work/Commercial/complex_1/cx19.JPG,Work/Commercial/complex_1/cx121.JPG">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Commercial/complex_1/cx120.JPG" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="commercial"
+     data-image="Work/Commercial/complex_2/cx21.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Commercial/complex_2/cx22.jpg,Work/Commercial/complex_2/cx23.jpg,Work/Commercial/complex_2/cx24.jpeg,Work/Commercial/complex_2/cx25.jpeg,Work/Commercial/complex_2/cx26.jpeg,Work/Commercial/complex_2/cx27.jpeg,Work/Commercial/complex_2/cx28.jpeg,Work/Commercial/complex_2/cx29.jpeg,Work/Commercial/complex_2/cx220.jpeg,Work/Commercial/complex_2/cx221.jpeg,Work/Commercial/complex_2/cx222.jpg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Commercial/complex_2/cx21.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    
+
+    <div class="project-card"
+     data-category="commercial"
+     data-image="Work/Commercial/complex_4/cx41.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Commercial/complex_4/cx42.jpg,Work/Commercial/complex_4/cx43.jpg,Work/Commercial/complex_4/cx44.jpg,Work/Commercial/complex_4/cx45.jpg,Work/Commercial/complex_4/cx46.jpg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Commercial/complex_4/cx41.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    
+
+    <div class="project-card"
+     data-category="gymstudio"
+     data-image="Work/Gymstudio/G 2/gs25.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Gymstudio/G 2/gs21.jpg,Work/Gymstudio/G 2/gs22.jpg,Work/Gymstudio/G 2/gs23.jpg,Work/Gymstudio/G 2/gs24.jpg,Work/Gymstudio/G 2/gs26.jpg,Work/Gymstudio/G 2/gs27.jpg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Gymstudio/G 2/gs25.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="gymstudio"
+     data-image="Work/Gymstudio/G 3/gs315.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Gymstudio/G 3/gs313.JPG,Work/Gymstudio/G 3/gs310.JPG,Work/Gymstudio/G 3/gs309.JPG,Work/Gymstudio/G 3/gs305.JPG,Work/Gymstudio/G 3/gs304.JPG,Work/Gymstudio/G 3/gs303.JPG,Work/Gymstudio/G 3/gs302.JPG">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Gymstudio/G 3/gs315.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    
+    <div class="project-card"
+     data-category="gymstudio"
+     data-image="Work/Gymstudio/G 5/gs505.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Gymstudio/G 5/gs508.jpg,Work/Gymstudio/G 5/gs507.jpg,Work/Gymstudio/G 5/gs505.jpg,Work/Gymstudio/G 5/gs512.jpg,Work/Gymstudio/G 5/gs502.jpg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Gymstudio/G 5/gs505.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="interiors"
+     data-image="Work/Interiors/inte2/inte206.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Interiors/inte2/inte216.jpg,Work/Interiors/inte2/inte201.jpg,Work/Interiors/inte2/inte208.jpg,Work/Interiors/inte2/inte209.jpg,Work/Interiors/inte2/inte211.jpg,Work/Interiors/inte2/inte212.jpg,Work/Interiors/inte2/inte213.jpg,Work/Interiors/inte2/inte214.jpg,Work/Interiors/inte2/inte219.jpg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Interiors/inte2/inte206.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="interiors"
+     data-image="Work/Interiors/inte3/inte302.jpeg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Interiors/inte3/inte303.jpeg,Work/Interiors/inte3/inte304.jpeg,Work/Interiors/inte3/inte305.jpeg,Work/Interiors/inte3/inte306.jpeg,Work/Interiors/inte3/inte307.jpeg,Work/Interiors/inte3/inte308.jpeg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Interiors/inte3/inte302.jpeg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="interiors"
+     data-image="Work/Interiors/inte4/inte411.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Interiors/inte4/inte401.jpg,Work/Interiors/inte4/inte403.jpg,Work/Interiors/inte4/inte407.jpg,Work/Interiors/inte4/inte409.jpg,Work/Interiors/inte4/inte411.jpg,Work/Interiors/inte4/inte413.jpg">
+      <div class="card-badge">Residential</div>
+      <img loading="lazy" src="Work/Interiors/inte4/inte411.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="interiors"
+     data-image="Work/Interiors/inte5/inte505.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Interiors/inte5/inte501.png,Work/Interiors/inte5/inte502.png,Work/Interiors/inte5/inte503.jpg,Work/Interiors/inte5/inte507.jpg,Work/Interiors/inte5/inte508.jpg,Work/Interiors/inte5/inte511.jpg,Work/Interiors/inte5/inte513.jpg,Work/Interiors/inte5/inte515.jpg,Work/Interiors/inte5/inte516.jpg">
+      <div class="card-badge">Interior</div>
+      <img loading="lazy" src="Work/Interiors/inte5/inte505.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="interiors"
+     data-image="Work/Interiors/inte6/inte615.png"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Interiors/inte6/inte601.png,Work/Interiors/inte6/inte602.png,Work/Interiors/inte6/inte603.png">
+      <div class="card-badge">Interior</div>
+      <img loading="lazy" src="Work/Interiors/inte6/inte615.png" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="interiors"
+     data-image="Work/Interiors/inte7/inte704.JPG"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Interiors/inte7/inte705.JPG,Work/Interiors/inte7/inte707.JPG,Work/Interiors/inte7/inte709.JPG,Work/Interiors/inte7/inte710.JPG,Work/Interiors/inte7/inte712.JPG,Work/Interiors/inte7/inte701.JPG">
+      <div class="card-badge">Interior</div>
+      <img loading="lazy" src="Work/Interiors/inte7/inte704.JPG" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="interiors"
+     data-image="Work/Interiors/inte8/inte801.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Interiors/inte8/inte802.jpg,Work/Interiors/inte8/inte803.jpg,Work/Interiors/inte8/inte804.jpg,Work/Interiors/inte8/inte806.jpg,Work/Interiors/inte8/inte807.jpg,Work/Interiors/inte8/inte808.jpg">
+      <div class="card-badge">Interior</div>
+      <img loading="lazy" src="Work/Interiors/inte8/inte801.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="interiors"
+     data-image="Work/Interiors/inte10/inte1004.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Interiors/inte10/inte1001.jpg,Work/Interiors/inte10/inte1002.jpg,Work/Interiors/inte10/inte1003.jpg,Work/Interiors/inte10/inte1005.jpg">
+      <div class="card-badge">Interior</div>
+      <img loading="lazy" src="Work/Interiors/inte10/inte1004.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    <div class="project-card"
+     data-category="interiors"
+     data-image="Work/Interiors/inte11/inte1101.jpg"
+     data-title="Courtyard Villa"
+     data-description="Luxury residential villa focused on openness, natural ventilation, and modern detailing."
+     data-gallery="Work/Interiors/inte11/inte1102.jpg,Work/Interiors/inte11/inte1103.jpg,Work/Interiors/inte11/inte1104.jpg,Work/Interiors/inte11/inte1105.jpg,Work/Interiors/inte11/inte1106.jpg,Work/Interiors/inte11/inte1107.jpg,Work/Interiors/inte11/inte1108.jpg,Work/Interiors/inte11/inte1109.jpg,Work/Interiors/inte11/inte1110.jpg,Work/Interiors/inte11/inte1111.jpg">
+      <div class="card-badge">Interior</div>
+      <img loading="lazy" src="Work/Interiors/inte11/inte1101.jpg" class="card-img">
+      <div class="project-card-info">
+        <span>Residential &middot; 2025</span>
+        <h3>Courtyard Villa</h3>
+      </div>
+    </div>
+
+    
+
+    
+
+
+
+    <!-- ADD MORE CARDS HERE -->
+
+  </div><!-- /#work-grid -->
+
+  <footer class="main-footer">
+    <span class="footer-logo">INVOGUE</span>
+    <span>Architect &amp; Interior Design Studio &middot; Bengaluru</span>
+    <span>&copy; 2026 All rights reserved</span>
+  </footer>
+
+</div><!-- /#page-work -->
+
+
+<!-- ============================================================
+     OFFICE PAGE
+============================================================ -->
+<div id="page-office" class="page">
+
+  <div class="sec-header">
+    <span class="t-label">The Studio</span>
+    <h1>Office</h1>
+  </div>
+
+  <div class="office-subnav">
+    <div class="office-tab active" data-section="profile">Profile</div>
+    <div class="office-tab" data-section="people">People</div>
+    <div class="office-tab" data-section="awards">Awards</div>
+    <div class="office-tab" data-section="services">Services</div>
+    <div class="office-tab" data-section="upcoming">Upcoming Projects</div>
+  </div>
+
+  <!-- PROFILE -->
+  <div id="office-profile" class="office-section active">
+    <div class="profile-inner">
+      <div>
+        <div class="profile-img"> <img src="Work/Interiors/inte11/inte1101.jpg" alt=""></div>
+      </div>
+      <div class="profile-text">
+        <span class="t-label">About</span>
+        <div class="gold-line"></div>
+        <h2>Architecture that makes<br><em style="font-style:italic;">Dreams Unfold</em></h2>
+        <p>Architecture &amp; Interiors by INVOGUE is a multi-disciplinary firm of Civil Engineers, Architects, Structural Engineers, Interior Designers and Project Management Experts. With 390+ successful projects, including Residential Buildings, Bungalows, Villas and Commercial Buildings, we are considered one of the best construction companies in Bangalore. Our firm has expanded to Outskirts completing many successful projects like Farm houses and Homestays in Western regions.<br><br>
+        The leadership team at INVOGUE is dedicated to continuously improving their processes to deliver projects effectively.<br><br>
+        The architecture firm in Karnataka, India aims to turn their clients' visions into reality. Established in 2008, they have since built a reputation for providing high quality design and construction services across a variety of sectors. With over a decade of experience, the architects in Bangalore are a team of highly qualified professionals offering master planning, project management, building design, landscape, hardscape design, interior design and construction management.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PEOPLE -->
+  <div id="office-people" class="office-section">
+    <div class="people-grid">
+      <div class="person-card">
+        <div class="person-img">Photo</div>
+        <h4>Santhosh G N</h4>
+        <div class="role">Principal Architect</div>
+        <div class="bio">B.Arch, M.Arch. Brief description of background and role at INVOGUE.</div>
+      </div>
+      <div class="person-card">
+        <div class="person-img">Photo</div>
+        <h4>Shyam M</h4>
+        <div class="role">Principal Interior Designer</div>
+        <div class="bio">B.Arch. Brief bio here.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AWARDS -->
+  <div id="office-awards" class="office-section">
+  <div class="awards-inner">
+
+    <h2>Recognition & Awards</h2>
+
+    <div class="awards-gallery">
+
+      
+    <div class="awards-page active">
+
+        <!-- AWARD CARD 1 -->
+    <div class="award-card">
+
+      <img 
+        src="Awards/Awards 1.jpeg"
+        class="award-img"
+        data-full="Awards/Awards 1.jpeg"
+      >
+
+      <div class="award-content">
+
+        <div class="award-year">2025</div>
+
+        <h3>Luxury Residence Award</h3>
+
+        <p>
+          Description about the award and recognition received for the project.
+        </p>
+
+      </div>
+    </div>
+
+    <!-- AWARD CARD 2 -->
+    <div class="award-card">
+
+      <img 
+        src="Awards/Awards 4.JPG"
+        class="award-img"
+        data-full="Awards/Awards 4.JPG"
+      >
+
+      <div class="award-content">
+
+        <div class="award-year">2025</div>
+
+        <h3>Luxury Residence Award</h3>
+
+        <p>
+          Description about the award and recognition received for the project.
+        </p>
+
+      </div>
+    </div>
+
+    <!-- AWARD CARD 3 -->
+    <div class="award-card">
+
+      <img 
+        src="Awards/Awards 6.JPG"
+        class="award-img"
+        data-full="Awards/Awards 6.JPG"
+      >
+
+      <div class="award-content">
+
+        <div class="award-year">2025</div>
+
+        <h3>Luxury Residence Award</h3>
+
+        <p>
+          Description about the award and recognition received for the project.
+        </p>
+
+      </div>
+    </div>
+
+    <!-- AWARD CARD 4 -->
+    <div class="award-card">
+
+      <img 
+        src="Awards/Awards 24.JPG"
+        class="award-img"
+        data-full="Awards/Awards 24.JPG"
+      >
+
+      <div class="award-content">
+
+        <div class="award-year">2025</div>
+
+        <h3>Luxury Residence Award</h3>
+
+        <p>
+          Description about the award and recognition received for the project.
+        </p>
+
+      </div>
+    </div>
+
+    <!-- AWARD CARD 5 -->
+    <div class="award-card">
+
+      <img 
+        src="Awards/Awards 2.jpg"
+        class="award-img"
+        data-full="Awards/Awards 2.jpg"
+      >
+
+      <div class="award-content">
+
+        <div class="award-year">2025</div>
+
+        <h3>Luxury Residence Award</h3>
+
+        <p>
+          Description about the award and recognition received for the project.
+        </p>
+
+      </div>
+    </div>
+    <!-- AWARD CARD 6 -->
+    <div class="award-card">
+
+      <img 
+        src="Awards/Awards 3.jpg"
+        class="award-img"
+        data-full="Awards/Awards 3.jpg"
+      >
+
+      <div class="award-content">
+
+        <div class="award-year">2025</div>
+
+        <h3>Luxury Residence Award</h3>
+
+        <p>
+          Description about the award and recognition received for the project.
+        </p>
+
+      </div>
+    </div>
+
+  </div>
+
+
+    <div class="awards-page">
+
+        <!-- AWARD CARD 1 -->
+      <div class="award-card">
+
+      <img 
+        src="Awards/Awards 16.JPG"
+        class="award-img"
+        data-full="Awards/Awards 16.JPG"
+      >
+
+      <div class="award-content">
+
+        <div class="award-year">2025</div>
+
+        <h3>Luxury Residence Award</h3>
+
+        <p>
+          Description about the award and recognition received for the project.
+        </p>
+
+      </div>
+      </div>
+
+    <!-- AWARD CARD 2 -->
+    <div class="award-card">
+
+      <img 
+        src="Awards/Awards 17.JPG"
+        class="award-img"
+        data-full="Awards/Awards 17.JPG"
+      >
+
+      <div class="award-content">
+
+        <div class="award-year">2025</div>
+
+        <h3>Luxury Residence Award</h3>
+
+        <p>
+          Description about the award and recognition received for the project.
+        </p>
+
+      </div>
+      </div>
+
+    <!-- AWARD CARD 3 -->
+    <div class="award-card">
+
+      <img 
+        src="Awards/Awards 23.JPG"
+        class="award-img"
+        data-full="Awards/Awards 23.JPG"
+      >
+
+      <div class="award-content">
+
+        <div class="award-year">2025</div>
+
+        <h3>Luxury Residence Award</h3>
+
+        <p>
+          Description about the award and recognition received for the project.
+        </p>
+
+      </div>
+      </div>
+
+    <!-- AWARD CARD 4 -->
+    <div class="award-card">
+
+      <img 
+        src="Awards/Awards 22.JPG"
+        class="award-img"
+        data-full="Awards/Awards 22.JPG"
+      >
+
+      <div class="award-content">
+
+        <div class="award-year">2025</div>
+
+        <h3>Luxury Residence Award</h3>
+
+        <p>
+          Description about the award and recognition received for the project.
+        </p>
+
+      </div>
+      </div>
+
+    <!-- AWARD CARD 5 -->
+    <div class="award-card">
+
+      <img 
+        src="Awards/Awards 9.JPG"
+        class="award-img"
+        data-full="Awards/Awards 9.JPG"
+      >
+
+      <div class="award-content">
+
+        <div class="award-year">2025</div>
+
+        <h3>Luxury Residence Award</h3>
+
+        <p>
+          Description about the award and recognition received for the project.
+        </p>
+
+      </div>
+      </div>
+
+    <!-- AWARD CARD 6 -->
+    <div class="award-card">
+
+      <img 
+        src="Awards/Awards 5.JPG"
+        class="award-img"
+        data-full="Awards/Awards 5.JPG"
+      >
+
+      <div class="award-content">
+
+        <div class="award-year">2025</div>
+
+        <h3>Luxury Residence Award</h3>
+
+        <p>
+          Description about the award and recognition received for the project.
+        </p>
+
+      </div>
+      </div>
+
+  </div>
+
+
+  <div class="awards-pagination">
+
+  <button class="award-page-btn active" data-page="0">1</button>
+
+  <button class="award-page-btn" data-page="1">2</button>
+
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div id="office-services" class="office-section">
+    <div class="publications-inner">
+      <h2>Services</h2>
+      <div class="services-list">
+        <div class="pub-item">&#10022; &nbsp; Architectural Design Services</div>
+        <div class="pub-item">&#10022; &nbsp; Turnkey Construction (Residential &amp; Commercial)</div>
+        <div class="pub-item">&#10022; &nbsp; Road &amp; Infrastructures</div>
+        <div class="pub-item">&#10022; &nbsp; Pre-Engineered Building Steel Structures</div>
+        <div class="pub-item">&#10022; &nbsp; Corporate Interior Designs</div>
+        <div class="pub-item">&#10022; &nbsp; Turnkey Office Solutions</div>
+        <div class="pub-item">&#10022; &nbsp; Plumbing &amp; Electrical Services</div>
+        <div class="pub-item">&#10022; &nbsp; Networking Solutions</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPCOMING PROJECTS -->
+  <div id="office-upcoming" class="office-section">
+    <div class="events-inner">
+      <div class="event-group">
+        <h3>Upcoming Projects</h3>
+        <div class="event-item">
+          <span class="event-year">2026</span>
+          <span>Luxury Villa Development &mdash; Mysuru</span>
+        </div>
+        <div class="event-item">
+          <span class="event-year">2026</span>
+          <span>Premium Resort Project &mdash; Coorg</span>
+        </div>
+        <div class="event-item">
+          <span class="event-year">2027</span>
+          <span>Commercial Office Interiors &mdash; Bangalore</span>
+        </div>
+        <div class="event-item">
+          <span class="event-year">2027</span>
+          <span>Residential Community Planning &mdash; Mysuru</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="main-footer">
+    <span class="footer-logo">INVOGUE</span>
+    <span>Architect &amp; Interior Design Studio &middot; Bengaluru</span>
+    <span>&copy; 2026 All rights reserved</span>
+  </footer>
+
+</div><!-- /#page-office -->
+
+
+<!-- ============================================================
+     CONTACT PAGE
+============================================================ -->
+<div id="page-contact" class="page">
+
+  <div class="contact-inner">
+    <div class="contact-left">
+      <span class="t-label" style="display:block;margin-bottom:16px;">Get in Touch</span>
+      <h2>Let's create<br>something<br>extraordinary</h2>
+      <div class="tagline-script">Dreams Unfold</div>
+
+      <div class="contact-detail">
+        <span class="t-label" style="display:block;margin-bottom:8px;">Address</span>
+        <p>
+          INVOGUE Architecture<br>
+          KR complex, 15, 4th Cross Rd, KR Layout, JP Nagar 6th Phase<br>
+          Bengaluru &mdash; 560078<br>
+          Karnataka, India
+        </p>
+      </div>
+      <div class="contact-detail">
+        <span class="t-label" style="display:block;margin-bottom:8px;">Phone</span>
+        <p>+91 95909 53737</p>
+      </div>
+      <div class="contact-detail">
+        <span class="t-label" style="display:block;margin-bottom:8px;">Email</span>
+        <p>reach@invoguearch.co.in<br>santhosh@invoguearch.co.in</p>
+      </div>
+      <div class="contact-detail">
+        <span class="t-label" style="display:block;margin-bottom:8px;">Hours</span>
+        <p>Monday &ndash; Saturday &middot; 9:00 AM &ndash; 6:00 PM</p>
+      </div>
+
+      <div class="social-links">
+        <a href="https://instagram.com/invogue" target="_blank" class="social-link">Instagram</a>
+        <a href="https://facebook.com/invogue" target="_blank" class="social-link">Facebook</a>
+        <a href="https://linkedin.com/company/invogue" target="_blank" class="social-link">LinkedIn</a>
+        <a href="https://youtube.com/invogue" target="_blank" class="social-link">YouTube</a>
+
+        <a href="https://wa.me/919876543210"
+          target="_blank"
+          class="social-link whatsapp-link">
+
+          <svg xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="currentColor">
+
+            <path d="M20.52 3.48A11.82 11.82 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.97L0 24l6.31-1.65a11.83 11.83 0 0 0 5.75 1.47h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.45-8.44zm-8.46 18.3h-.01a9.84 9.84 0 0 1-5.02-1.37l-.36-.21-3.74.98 1-3.65-.24-.37a9.82 9.82 0 0 1-1.52-5.25c0-5.45 4.43-9.88 9.88-9.88a9.8 9.8 0 0 1 6.98 2.89 9.8 9.8 0 0 1 2.89 6.98c0 5.45-4.43 9.88-9.86 9.88zm5.42-7.38c-.3-.15-1.78-.88-2.06-.98-.27-.1-.47-.15-.67.15s-.77.98-.94 1.18c-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.48-1.74-1.65-2.04-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.07-.8.37s-1.05 1.03-1.05 2.52 1.08 2.93 1.23 3.13c.15.2 2.13 3.25 5.16 4.56.72.31 1.28.5 1.72.64.72.23 1.37.2 1.89.12.58-.09 1.78-.73 2.03-1.43.25-.7.25-1.3.17-1.43-.07-.13-.27-.2-.57-.35z"/>
+          </svg>
+
+          WhatsApp
+
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <span class="t-label" style="display:block;margin-bottom:28px;">Send a Message</span>
+      <div class="contact-form">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text"
+          id="contact-name"
+          placeholder="Your Name">
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" placeholder="your@email.com" />
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel"
+          id="contact-phone"
+          placeholder="Phone Number">
+        </div>
+        <div class="form-group">
+          <label>Project Type</label>
+          <select id="contact-project">
+            <option value="" disabled selected>Select a category</option>
+            <option>Residential Architecture</option>
+            <option>Commercial Architecture</option>
+            <option>Interiors &mdash; Residential</option>
+            <option>Interiors &mdash; Commercial</option>
+            <option>Resort / Hospitality Design</option>
+            <option>Institutional</option>
+            <option>Gym Studio</option>
+            <option>Industries</option>
+            <option>Renovation / Retrofit</option>
+            <option>Consultation</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your Message *</label>
+          <textarea id="contact-message"
+          placeholder="Your Message"></textarea>
+        </div>
+        <button type="button"
+        class="btn-submit"
+        id="whatsapp-submit">Send Enquiry</button>
+      </div>
+
+      <div class="map-placeholder">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3696.626158548062!2d77.57913197484021!3d12.904295987404922!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae157adde202f7%3A0x1c5936d0b4d12297!2sInvogue!5e1!3m2!1sen!2sin!4v1779120870100!5m2!1sen!2sin"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <footer class="main-footer">
+    <span class="footer-logo">INVOGUE</span>
+    <span>Architect &amp; Interior Design Studio &middot; Bengaluru</span>
+    <span>&copy; 2026 All rights reserved &middot; <a href="#">Privacy Policy</a></span>
+  </footer>
+
+</div><!-- /#page-contact -->
+
+
+<!-- SCROLL TOP -->
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+<!-- GLOBAL MODAL -->
+<div id="global-modal">
+  <div class="modal-container">
+
+  <div class="modal-full-content">
+
+    <span id="modal-close">&#10005;</span>
+
+    <!-- MAIN IMAGE -->
+    <div class="modal-main-image-wrap">
+      <img id="modal-image" src="" alt="">
+    </div>
+
+    <!-- CONTENT -->
+    <div class="modal-info">
+
+      <div id="modal-details"></div>
+
+    </div>
+
+    <!-- GALLERY -->
+    <div class="modal-gallery" id="modal-gallery">
+
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+  /* PAGE SWITCHER */
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    document.querySelectorAll('.nav-link').forEach(a =>
+      a.classList.toggle('active', a.dataset.page === name));
+    window.scrollTo(0, 0);
+    document.getElementById('global-modal').classList.remove('open');
+  }
+  document.querySelectorAll('.nav-link').forEach(a =>
+    a.addEventListener('click', e => { e.preventDefault(); showPage(a.dataset.page); }));
+
+  /* MOBILE NAV */
+  function openMobileNav()  { document.getElementById('mobile-nav').classList.add('open'); }
+  function closeMobileNav() { document.getElementById('mobile-nav').classList.remove('open'); }
+
+  /* HERO SLIDESHOW */
+  const slides   = document.querySelectorAll('.hero-slide');
+  const dotsWrap = document.getElementById('hero-dots');
+  let cur = 0, timer;
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'hero-dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsWrap.appendChild(d);
+  });
+  function goTo(n) {
+    slides[cur].classList.remove('active');
+    document.querySelectorAll('.hero-dot')[cur].classList.remove('active');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    document.querySelectorAll('.hero-dot')[cur].classList.add('active');
+    clearInterval(timer);
+    timer = setInterval(() => goTo(cur + 1), 5500);
+  }
+  timer = setInterval(() => goTo(cur + 1), 5500);
+
+  /* OFFICE SUB-NAV */
+  document.querySelectorAll('.office-tab').forEach(tab =>
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.office-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.office-section').forEach(s => s.classList.remove('active'));
+      tab.classList.add('active');
+      const target = document.getElementById('office-' + tab.dataset.section);
+      if (target) target.classList.add('active');
+    }));
+
+  /* WORK FILTERS
+     "interiors" button shows ALL interiors subcategories (interiors, interiors-residential, interiors-commercial) */
+  document.querySelectorAll('.filter-btn').forEach(btn =>
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.project-card').forEach(card => {
+        const cat = card.dataset.category || '';
+        let show = false;
+        if (f === 'all') {
+          show = true;
+        } else if (f === 'interiors') {
+          show = cat === 'interiors' || cat.startsWith('interiors-');
+        } else {
+          show = cat === f;
+        }
+        card.style.display = show ? '' : 'none';
+      });
+    }));
+
+  /* SCROLL TOP */
+  window.addEventListener('scroll', () =>
+    document.getElementById('scroll-top').classList.toggle('visible', scrollY > 400));
+
+  /* THEME TOGGLE */
+  const themeToggle = document.getElementById('theme-toggle');
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-theme');
+    themeToggle.innerHTML = document.body.classList.contains('light-theme') ? '&#127769;' : '&#9728;&#65039;';
+    localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+  });
+  window.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light-theme');
+      themeToggle.innerHTML = '&#127769;';
+    }
+  });
+
+  /* AWARDS PAGINATION */
+  const awardBtns  = document.querySelectorAll('.award-page-btn');
+  const awardPages = document.querySelectorAll('.awards-page');
+  awardBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      awardBtns.forEach(b => b.classList.remove('active'));
+      awardPages.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      awardPages[btn.dataset.page].classList.add('active');
+    });
+  });
+
+  /* GLOBAL MODAL */
+  const modal        = document.getElementById('global-modal');
+  const modalImg     = document.getElementById('modal-image');
+  const modalDetails = document.getElementById('modal-details');
+  const modalClose   = document.getElementById('modal-close');
+
+  // modalClose.addEventListener('click', () => modal.classList.remove('open'));
+  modalClose.addEventListener('click', () => {
+
+  modal.classList.remove('open');
+  modal.style.pointerEvents = 'auto';
+
+  // RESET IMAGE
+  modalImg.src = '';
+
+  // CLEAR GALLERY
+  document.getElementById('modal-gallery').innerHTML = '';
+
+  // FORCE POINTER RESET
+  setTimeout(() => {
+    modal.style.pointerEvents = 'none';
+  }, 300);
+
+  });
+  modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') modal.classList.remove('open');
+  });
+
+  /* Award image click -> modal */
+  document.querySelectorAll('.award-img').forEach(img => {
+    img.addEventListener('click', () => {
+      modalImg.src = img.dataset.full || img.src;
+      modalDetails.innerHTML = '';
+      modal.classList.add('open');
+    });
+  });
+
+  // /* Work project card click -> modal */
+  // document.querySelectorAll('.project-card').forEach(card => {
+  //   card.addEventListener('click', () => {
+  //     const imgSrc = card.dataset.image || '';
+  //     const title  = card.dataset.title || 'Project';
+  //     const desc   = card.dataset.description || '';
+  //     const cat    = card.dataset.category || '';
+  //     if (!imgSrc && !title) return;
+  //     modalImg.src = imgSrc;
+  //     modalImg.style.display = imgSrc ? 'block' : 'none';
+  //     modalDetails.innerHTML = `
+  //       <div class="modal-category">${cat.replace(/-/g, ' ')}</div>
+  //       <h2>${title}</h2>
+  //       <p>${desc}</p>
+  //     `;
+  //     modal.classList.add('open');
+  //   });
+  // });
+
+    /* ADVANCED PROJECT MODAL */
+
+  document.querySelectorAll('.project-card').forEach(card => {
+
+    card.addEventListener('click', () => {
+
+      const imgSrc = card.dataset.image || '';
+      const title  = card.dataset.title || 'Project';
+      const desc   = card.dataset.description || '';
+      const cat    = card.dataset.category || '';
+
+      const gallery = card.dataset.gallery
+        ? card.dataset.gallery.split(',')
+        : [];
+
+      modalImg.src = imgSrc;
+
+      modalDetails.innerHTML = `
+        <div class="modal-category">
+          ${cat.replace(/-/g, ' ')}
+        </div>
+
+        <h2>${title}</h2>
+
+        <p>${desc}</p>
+      `;
+
+      const galleryWrap = document.getElementById('modal-gallery');
+
+      galleryWrap.innerHTML = '';
+
+      gallery.forEach(img => {
+
+        const image = document.createElement('img');
+
+        image.src = img.trim();
+
+        image.addEventListener('click', () => {
+          modalImg.src = img.trim();
+        });
+
+        galleryWrap.appendChild(image);
+
+      });
+
+      modal.classList.add('open');
+
+    });
+
+  });
+
+  /* DISABLE RIGHT CLICK */
+  document.addEventListener('contextmenu', e => e.preventDefault());
+
+  /* BLOCK SHORTCUTS */
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 's') e.preventDefault();
+    if (e.ctrlKey && e.key === 'u') e.preventDefault();
+    if (e.ctrlKey && e.key === 'c') e.preventDefault();
+    if (e.key === 'F12') e.preventDefault();
+  });
+
+  /* ============================================================
+   WHATSAPP BUSINESS FORM
+============================================================ */
+
+    const whatsappBtn = document.getElementById('whatsapp-submit');
+
+    if (whatsappBtn) {
+
+      whatsappBtn.addEventListener('click', () => {
+
+        const name =
+          document.getElementById('contact-name').value;
+
+        const phone =
+          document.getElementById('contact-phone').value;
+
+        const project =
+          document.getElementById('contact-project').value;
+
+        const message =
+          document.getElementById('contact-message').value;
+
+        const text = `Hello INVOGUE,
+
+    Name: ${name}
+
+    Phone: ${phone}
+
+    Project Type: ${project}
+
+    Message:
+    ${message}`;
+
+        /* REPLACE NUMBER BELOW */
+        const whatsappURL =
+          `https://wa.me/919876543210?text=${encodeURIComponent(text)}`;
+
+        window.open(whatsappURL, '_blank');
+
+      });
+
+    }
+
+
+
+</script>
+</body>
+</html>
